@@ -4,19 +4,4 @@
     "url": "https://shop.amul.com/en/product/amul-high-protein-rose-lassi-200-ml-or-pack-of-30",
     "emoji": "🌹"
   }
-
-  // ── Add more products below ────────────────────────────────────────────────
-  // Just copy-paste a block and change name, url, emoji.
-  // Find product URLs by browsing https://shop.amul.com
-  //
-  // ,{
-  //   "name": "Amul High Protein Mango Lassi (Pack of 30)",
-  //   "url": "https://shop.amul.com/en/product/amul-high-protein-mango-lassi-200-ml-or-pack-of-30",
-  //   "emoji": "🥭"
-  // }
-  // ,{
-  //   "name": "Amul Kool Cafe Tetrapak (Pack of 24)",
-  //   "url": "https://shop.amul.com/en/product/...",
-  //   "emoji": "☕"
-  // }
 ]

@@ -129,7 +129,9 @@ function fetchUrl(url) {
 function detectStockStatus(html) {
   const body = html.toLowerCase();
 
+  // ── Out-of-stock signals (Amul uses "Sold Out" + "Notify Me") ───────────
   const OUT_SIGNALS = [
+    "sold out",                                          // ← Amul primary
     "out of stock",
     "outofstock",
     "out_of_stock",
@@ -138,20 +140,26 @@ function detectStockStatus(html) {
     "currently unavailable",
   ];
 
+  // ── In-stock signals ────────────────────────────────────────────────────
+  // Amul shows "Add to Cart" even when sold out (as a disabled button),
+  // so we only trust it when "Sold Out" / "Notify Me" are ABSENT.
   const IN_SIGNALS = [
     '"availability":"http://schema.org/instock"',
+    '"instock"',
     "add to cart",
     "addtocart",
     "add-to-cart",
-    '"instock"',
     "buy now",
   ];
 
-  const isOut = OUT_SIGNALS.some((s) => body.includes(s));
+  // "Notify Me" form is shown by Amul specifically when out of stock
+  const NOTIFY_ME = body.includes("notify me");
+
+  const isOut = OUT_SIGNALS.some((s) => body.includes(s)) || NOTIFY_ME;
   const isIn  = IN_SIGNALS.some((s) => body.includes(s));
 
-  if (isIn && !isOut) return true;
-  if (isOut) return false;
+  if (isOut) return false;           // out-of-stock check wins
+  if (isIn)  return true;
   return null;
 }
 
